@@ -9,7 +9,7 @@ namespace AzureServiceBusManagementDemo
 
         internal static void RunReadEvalPrintLoop()
         {
-            ManagementHelper helper = new ManagementHelper(ServiceBusConnectionString);
+            ManagementHelper helper = new (ServiceBusConnectionString);
 
             bool done = false;
             do

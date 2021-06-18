@@ -19,8 +19,8 @@ namespace AzureServiceBusManagementDemo
         public async Task CreateQueueAsync(string queuePath)
         {
             Write("Creating queue {0}...", queuePath);
-            var description = GetQueueDescription(queuePath);
-            var createdDescription = await _managementClient.CreateQueueAsync(description);
+            QueueDescription description = GetQueueDescription(queuePath);
+            QueueDescription createdDescription = await _managementClient.CreateQueueAsync(description);
             WriteLine("Done!");
         }
 
@@ -48,33 +48,32 @@ namespace AzureServiceBusManagementDemo
         {
             QueueDescription queueDescription = await _managementClient.GetQueueAsync(queuePath);
 
-
             WriteLine($"Queue description for { queuePath }");
-            WriteLine($"    Path:                                   { queueDescription.Path }");
-            WriteLine($"    MaxSizeInMB:                            { queueDescription.MaxSizeInMB }");
-            WriteLine($"    RequiresSession:                        { queueDescription.RequiresSession }");
-            WriteLine($"    RequiresDuplicateDetection:             { queueDescription.RequiresDuplicateDetection }");
-            WriteLine($"    DuplicateDetectionHistoryTimeWindow:    { queueDescription.DuplicateDetectionHistoryTimeWindow }");
-            WriteLine($"    LockDuration:                           { queueDescription.LockDuration }");
-            WriteLine($"    DefaultMessageTimeToLive:               { queueDescription.DefaultMessageTimeToLive }");
-            WriteLine($"    EnableDeadLetteringOnMessageExpiration: { queueDescription.EnableDeadLetteringOnMessageExpiration }");
-            WriteLine($"    EnableBatchedOperations:                { queueDescription.EnableBatchedOperations }");
-            WriteLine($"    MaxSizeInMegabytes:                     { queueDescription.MaxSizeInMB }");
-            WriteLine($"    MaxDeliveryCount:                       { queueDescription.MaxDeliveryCount }");
-            WriteLine($"    Status:                                 { queueDescription.Status }");
+            WriteLine($"    Path:                                   {queueDescription.Path}");
+            WriteLine($"    MaxSizeInMB:                            {queueDescription.MaxSizeInMB}");
+            WriteLine($"    RequiresSession:                        {queueDescription.RequiresSession}");
+            WriteLine($"    RequiresDuplicateDetection:             {queueDescription.RequiresDuplicateDetection}");
+            WriteLine($"    DuplicateDetectionHistoryTimeWindow:    {queueDescription.DuplicateDetectionHistoryTimeWindow}");
+            WriteLine($"    LockDuration:                           {queueDescription.LockDuration}");
+            WriteLine($"    DefaultMessageTimeToLive:               {queueDescription.DefaultMessageTimeToLive}");
+            WriteLine($"    EnableDeadLetteringOnMessageExpiration: {queueDescription.EnableDeadLetteringOnMessageExpiration}");
+            WriteLine($"    EnableBatchedOperations:                {queueDescription.EnableBatchedOperations}");
+            WriteLine($"    MaxSizeInMegabytes:                     {queueDescription.MaxSizeInMB}");
+            WriteLine($"    MaxDeliveryCount:                       {queueDescription.MaxDeliveryCount}");
+            WriteLine($"    Status:                                 {queueDescription.Status}");
         }
 
         public async Task CreateTopicAsync(string topicPath)
         {
             Write("Creating topic {0}...", topicPath);
-            TopicDescription description = await _managementClient.CreateTopicAsync(topicPath);
+            TopicDescription topicDescription = await _managementClient.CreateTopicAsync(topicPath);
             WriteLine("Done!");
         }
 
         public async Task CreateSubscriptionAsync(string topicPath, string subscriptionName)
         {
             Write("Creating subscription {0}/subscriptions/{1}...", topicPath, subscriptionName);
-            var description = await _managementClient.CreateSubscriptionAsync(topicPath, subscriptionName);
+            SubscriptionDescription subscriptionDescription = await _managementClient.CreateSubscriptionAsync(topicPath, subscriptionName);
             WriteLine("Done!");
         }
 
