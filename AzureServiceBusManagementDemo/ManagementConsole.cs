@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading.Tasks;
+
 using static System.Console;
 
 namespace AzureServiceBusManagementDemo
@@ -7,11 +9,11 @@ namespace AzureServiceBusManagementDemo
     {
         private const string ServiceBusConnectionString = "";
 
-        internal static void RunReadEvalPrintLoop()
+        internal static async Task RunReadEvalPrintLoop()
         {
-            ManagementHelper helper = new (ServiceBusConnectionString);
-
+            ManagementHelper managementHelper = new (ServiceBusConnectionString);
             bool done = false;
+
             do
             {
                 ForegroundColor = ConsoleColor.Cyan;
@@ -23,6 +25,7 @@ namespace AzureServiceBusManagementDemo
                 {
                     continue;
                 }
+
                 string[] commands = commandLine.Split(' ');
 
                 try
@@ -35,7 +38,7 @@ namespace AzureServiceBusManagementDemo
                             case "cq":
                                 if (commands.Length > 1)
                                 {
-                                    helper.CreateQueueAsync(commands[1]).Wait();
+                                    await managementHelper.CreateQueueAsync(commands[1]);
                                 }
                                 else
                                 {
@@ -46,14 +49,14 @@ namespace AzureServiceBusManagementDemo
 
                             case "listqueues":
                             case "lq":
-                                helper.ListQueuesAsync().Wait();
+                                await managementHelper.ListQueuesAsync();
                                 break;
 
                             case "getqueue":
                             case "gq":
                                 if (commands.Length > 1)
                                 {
-                                    helper.GetQueueAsync(commands[1]).Wait();
+                                    await managementHelper.GetQueueAsync(commands[1]);
                                 }
                                 else
                                 {
@@ -66,7 +69,7 @@ namespace AzureServiceBusManagementDemo
                             case "dq":
                                 if (commands.Length > 1)
                                 {
-                                    helper.DeleteQueueAsync(commands[1]).Wait();
+                                    await managementHelper.DeleteQueueAsync(commands[1]);
                                 }
                                 else
                                 {
@@ -79,7 +82,7 @@ namespace AzureServiceBusManagementDemo
                             case "ct":
                                 if (commands.Length > 1)
                                 {
-                                    helper.CreateTopicAsync(commands[1]).Wait();
+                                    await managementHelper.CreateTopicAsync(commands[1]);
                                 }
                                 else
                                 {
@@ -92,7 +95,7 @@ namespace AzureServiceBusManagementDemo
                             case "cs":
                                 if (commands.Length > 2)
                                 {
-                                    helper.CreateSubscriptionAsync(commands[1], commands[2]).Wait();
+                                    await managementHelper.CreateSubscriptionAsync(commands[1], commands[2]);
                                 }
                                 else
                                 {
@@ -103,7 +106,7 @@ namespace AzureServiceBusManagementDemo
 
                             case "listtopics":
                             case "lt":
-                                helper.ListTopicsAndSubscriptionsAsync().Wait();
+                                await managementHelper.ListTopicsAndSubscriptionsAsync();
                                 break;
 
                             case "exit":

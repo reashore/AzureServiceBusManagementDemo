@@ -19,8 +19,8 @@ namespace AzureServiceBusManagementDemo
         public async Task CreateQueueAsync(string queuePath)
         {
             Write("Creating queue {0}...", queuePath);
-            QueueDescription description = GetQueueDescription(queuePath);
-            QueueDescription createdDescription = await _managementClient.CreateQueueAsync(description);
+            QueueDescription queueDescription = GetQueueDescription(queuePath);
+            QueueDescription createdQueueDescription = await _managementClient.CreateQueueAsync(queueDescription);
             WriteLine("Done!");
         }
 

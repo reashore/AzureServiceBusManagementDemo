@@ -1,13 +1,14 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace AzureServiceBusManagementDemo
 {
     // ReSharper disable once ClassNeverInstantiated.Global
     internal class Program
     {
-        internal static void Main()
+        internal static async Task Main()
         {
-            ManagementConsole.RunReadEvalPrintLoop();
+            await ManagementConsole.RunReadEvalPrintLoop();
             Console.WriteLine("Done");
         }
     }
